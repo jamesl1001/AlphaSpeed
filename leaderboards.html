@@ -1,0 +1,121 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="AlphaSpeed is a game to test your typing ability, in speed and accuracy."/>
+    <meta name="author" content="JaL Productions"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <title>Leaderboards - AlphaSpeed</title>
+    <link rel="stylesheet" type="text/css" href="styles.css"/>
+    <link rel="shortcut icon" href="img/favicon.ico"/>
+    <link rel="apple-touch-icon-precomposed" href="img/touchicon-57.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/touchicon-72.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/touchicon-114.png">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/touchicon-144.png">
+</head>
+<body>
+    <h1>AlphaSpeed</h1>
+    <h2>Leaderboards</h2>
+
+    <a href="index.html">Back</a>
+
+    <ul>
+        <li><a href="#" id="straight">Straight</a></li>
+        <li><a href="#" id="esrever">Esrever</a></li>
+        <li><a href="#" id="random">Random</a></li>
+    </ul>
+
+    <h3>Straight</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody id="straightTbody">
+        </tbody>
+    </table>
+
+    <h3>Esrever</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody id="esreverTbody">
+        </tbody>
+    </table>
+
+    <h3>Random</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody id="randomTbody">
+        </tbody>
+    </table>
+
+    <script>
+        var game = 'straight';
+
+        request = new XMLHttpRequest();
+        request.open('GET', 'php/getScores.php', true);
+        request.send();
+
+        request.onload = function() {
+            if(request.status >= 200 && request.status < 400) {
+                displayScores(JSON.parse(request.responseText));
+            }
+        }
+
+        request.onerror = function() {
+            alert('Something went wrong. Please try again.');
+        }
+
+        function displayScores(json) {
+            var straightScores = [];
+            var esreverScores  = [];
+            var randomScores   = [];
+            var straightHtml   = '';
+            var esreverHtml    = '';
+            var randomHtml     = '';
+
+            for(var i = 0, l = json.length; i < l; i++) {
+                switch(json[i]['game']) {
+                    case 'straight':
+                        straightScores.push(json[i]);
+                        break;
+                    case 'esrever':
+                        esreverScores.push(json[i]);
+                        break;
+                    case 'random':
+                        randomScores.push(json[i]);
+                        break;
+                }
+            }
+
+            for(var i = 0, l = straightScores.length; i < l; i++) {
+                straightHtml += '<tr><td>' + straightScores[i]['name'] + '</td><td>' + straightScores[i]['score'] + '</td></tr>';
+            }
+
+            for(var i = 0, l = esreverScores.length; i < l; i++) {
+                esreverHtml += '<tr><td>' + esreverScores[i]['name'] + '</td><td>' + esreverScores[i]['score'] + '</td></tr>';
+            }
+
+            for(var i = 0, l = randomScores.length; i < l; i++) {
+                randomHtml += '<tr><td>' + randomScores[i]['name'] + '</td><td>' + randomScores[i]['score'] + '</td></tr>';
+            }
+
+            document.getElementById('straightTbody').innerHTML = straightHtml;
+            document.getElementById('esreverTbody').innerHTML  = esreverHtml;
+            document.getElementById('randomTbody').innerHTML   = randomHtml;
+        }
+    </script>
+</body>
+</html>
