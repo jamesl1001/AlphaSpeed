@@ -1,3 +1,19 @@
+* {
+   box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.centre {
+    width: 100%;
+    max-width: 1200px;
+    position: relative;
+    margin: 0 auto;
+}
+
 #letter {
     width: 300px;
     height: 300px;
