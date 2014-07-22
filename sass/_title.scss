@@ -1,0 +1,31 @@
+span {
+    display: block;
+}
+
+#word {
+    width: 500px;
+    height: 500px;
+    position: absolute;
+    left: 50%;
+    -webkit-perspective: 700px;
+    -webkit-perspective-origin: 0% 0%;
+}
+
+[id^="letter-"] {
+    position: absolute;
+    font-size: 80px;
+}
+
+@for $i from 1 through 10 {
+    #letter-#{$i} {
+        transform: rotateY($i * 36 + deg) translateZ(250px);
+        animation: letter-#{$i} 10s linear infinite;
+    }
+}
+
+@for $i from 1 through 10 {
+    @keyframes letter-#{$i} {
+        from { transform: rotateY($i * 36 + deg) translateZ(250px);       }
+        to   { transform: rotateY($i * 36 - 360 + deg) translateZ(250px); }
+    }
+}
