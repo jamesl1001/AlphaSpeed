@@ -3,44 +3,12 @@
 }
 
 body {
+    background: #18202D;
     margin: 0;
-    font-family: Helvetica, Arial, sans-serif;
-}
-
-h1 {
-    font-family: 'Audiowide', cursive;
-}
 
 .centre {
     width: 100%;
     max-width: 1200px;
     position: relative;
     margin: 0 auto;
-}
-
-#letter {
-    width: 300px;
-    height: 300px;
-    margin-top: -150px;
-    margin-left: -150px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    font-size: 300px;
-    text-align: center;
-    line-height: 300px;
-}
-
-#time {
-    display: block;
-    font-size: 30px;
-    text-align: center;
-}
-
-#score-form {
-    display: none;
-}
-
-.game-complete #score-form {
-    display: block;
 }
