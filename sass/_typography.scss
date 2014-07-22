@@ -10,3 +10,14 @@ h1 {
 h2 {
     font-weight: 300;
 }
+
+a {
+    border-bottom: 1px solid #EEE;
+    color: #EEE;
+    text-decoration: none;
+}
+
+a:hover {
+    border-bottom: 1px solid #14B6F4;
+    color: #14B6F4;
+}
